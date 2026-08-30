@@ -273,7 +273,9 @@ void LLDrawPoolWLSky::renderStarsDeferred(const LLVector3& camPosLocal) const
     }
     gDeferredStarProgram.uniform1f(sCustomAlpha, star_alpha);
 
-    sStarTime = (F32)LLFrameTimer::getElapsedSeconds() * 0.5f;
+    // Wrap the time uniform so the shader's procedural noise stays in a
+    // float-precision-friendly range over long sessions
+    sStarTime = fmodf((F32)LLFrameTimer::getElapsedSeconds() * 0.5f, 200.0f);
 
     gDeferredStarProgram.uniform1f(LLShaderMgr::WATER_TIME, sStarTime);
 

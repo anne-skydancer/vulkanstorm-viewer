@@ -8263,6 +8263,54 @@
     <real>0.0</real>
   </map>
 
+  <key>RenderStarfieldEnabled</key>
+  <map>
+    <key>Comment</key>
+    <string>Use the procedural starfield (many stars, milky-way band, intensity-scaled sizes). When false, the classic 1000-star field is used. Requires restart.</string>
+    <key>Persist</key>
+    <integer>1</integer>
+    <key>Type</key>
+    <string>Boolean</string>
+    <key>Value</key>
+    <integer>1</integer>
+  </map>
+
+  <key>RenderStarfieldPrimaryCount</key>
+  <map>
+    <key>Comment</key>
+    <string>Number of bright primary stars in the procedural starfield. Requires restart.</string>
+    <key>Persist</key>
+    <integer>1</integer>
+    <key>Type</key>
+    <string>U32</string>
+    <key>Value</key>
+    <integer>120000</integer>
+  </map>
+
+  <key>RenderStarfieldDustCount</key>
+  <map>
+    <key>Comment</key>
+    <string>Number of faint dust stars in the procedural starfield. Requires restart.</string>
+    <key>Persist</key>
+    <integer>1</integer>
+    <key>Type</key>
+    <string>U32</string>
+    <key>Value</key>
+    <integer>500000</integer>
+  </map>
+
+  <key>RenderStarfieldMilkyWay</key>
+  <map>
+    <key>Comment</key>
+    <string>Concentrate procedural stars along a milky-way band. Requires restart.</string>
+    <key>Persist</key>
+    <integer>1</integer>
+    <key>Type</key>
+    <string>Boolean</string>
+    <key>Value</key>
+    <integer>1</integer>
+  </map>
+
   <key>RenderDepthPrePass</key>
   <map>
     <key>Comment</key>

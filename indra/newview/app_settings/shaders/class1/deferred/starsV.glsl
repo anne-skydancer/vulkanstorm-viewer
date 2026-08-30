@@ -4,6 +4,7 @@
  * $LicenseInfo:firstyear=2007&license=viewerlgpl$
  * Second Life Viewer Source Code
  * Copyright (C) 2007, Linden Research, Inc.
+ * Copyright (C) 2025, William Weaver (paperwork) @ Second Life
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -27,19 +28,23 @@ uniform mat4 texture_matrix0;
 uniform mat4 modelview_projection_matrix;
 uniform float time;
 
+// Inputs
 in vec3 position;
 in vec4 diffuse_color;
 in vec2 texcoord0;
+in float weight;         // Star intensity input
 
+// Outputs
 out vec4 vertex_color;
 out vec2 vary_texcoord0;
 out vec2 screenpos;
+out float vary_intensity;
+out vec3 vary_worldDir;  // World direction vector for horizon dimming
 
 void main()
 {
     //transform vertex
     vec4 pos = modelview_projection_matrix * vec4(position, 1.0);
-
 
     // smash to far clip plane to
     // avoid rendering on top of moon (do NOT write to gl_FragDepth, it's slow)
@@ -47,8 +52,17 @@ void main()
 
     gl_Position = pos;
 
-    float t = mod(time, 1.25f);
-    screenpos = position.xy * vec2(t, t);
+    // Stable position derived from vertex position (used for noise hash in FS)
+    screenpos = position.xy;
+
+    // Calculate texture coordinates
     vary_texcoord0 = (texture_matrix0 * vec4(texcoord0,0,1)).xy;
+
+    // Pass vertex color and intensity
     vertex_color = diffuse_color;
+    vary_intensity = weight;
+
+    // World direction (normalized object position) for horizon effects
+    vary_worldDir = normalize(position);
 }
+
