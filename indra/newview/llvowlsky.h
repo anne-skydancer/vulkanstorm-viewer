@@ -35,7 +35,7 @@ private:
     inline static U32 getNumSlices(void);
     inline static U32 getStripsNumVerts(void);
     inline static U32 getStripsNumIndices(void);
-    inline static U32 getStarsNumVerts(void);
+    inline U32 getStarsNumVerts(void);
     inline static U32 getStarsNumIndices(void);
 
 public:
@@ -45,6 +45,8 @@ public:
     /*virtual*/ bool         isActive(void) const;
     /*virtual*/ LLDrawable * createDrawable(LLPipeline *pipeline);
     /*virtual*/ bool         updateGeometry(LLDrawable *drawable);
+
+    LLColor4 blackBodyColor(F32 temperature);
 
     void drawStars(void);
     void drawDome(void);
@@ -58,6 +60,15 @@ private:
 
     // helper function for initializing the stars.
     void initStars();
+
+    // classic pre-procedural star initialization (RenderStarfieldEnabled = false)
+    void initStarsClassic();
+
+    // procedural star generation for a layer of the starfield
+    void generateProceduralStars(
+        U32 count, U32 startIndex,
+        F32 min_intensity, F32 max_intensity, F32 brightness_exponent, F32 color_variation,
+        std::vector<LLVector3>& vertices, std::vector<LLColor4>& colors, std::vector<F32>& intensities);
 
     // helper function for building the strips vertex buffer.
     // note begin_stack and end_stack follow stl iterator conventions,
@@ -85,6 +96,9 @@ private:
     std::vector<LLVector3>  mStarVertices;              // Star verticies
     std::vector<LLColor4>   mStarColors;                // Star colors
     std::vector<F32>        mStarIntensities;           // Star intensities
+
+    // true when the procedural starfield (RenderStarfieldEnabled) was used
+    bool                    mProceduralStarfield{ false };
 };
 
 #endif // LL_VOWLSKY_H
