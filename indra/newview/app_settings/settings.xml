@@ -13166,13 +13166,13 @@
     <key>UpdaterServiceSetting</key>
     <map>
       <key>Comment</key>
-      <string>Configure updater service.</string>
+      <string>Configure updater service. VulkanLife: defaults to 0 (mandatory updates only); Linden Lab's update service does not serve the VulkanLife channel, so updates are effectively disabled until a self-hosted update service exists.</string>
       <key>Persist</key>
       <integer>1</integer>
       <key>Type</key>
       <string>U32</string>
       <key>Value</key>
-      <integer>3</integer>
+      <integer>0</integer>
     </map>
     <key>UpdaterWillingToTest</key>
     <map>

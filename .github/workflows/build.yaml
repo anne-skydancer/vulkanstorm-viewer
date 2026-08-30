@@ -275,10 +275,10 @@ jobs:
           branch=$AUTOBUILD_VCS_BRANCH
           if [[ "$edu" == "true" ]]
           then
-              export viewer_channel="Second Life Release edu"
+              export viewer_channel="VulkanLife Release edu"
           elif  [[ "$branch" == "develop" ]];
           then
-              export viewer_channel="Second Life Develop"
+              export viewer_channel="VulkanLife Develop"
           else
               IFS='/' read -ra ba <<< "$branch"
               prefix=${ba[0]}
@@ -287,12 +287,12 @@ jobs:
                   prj_str="${prj[*]}"
                   # uppercase first letter of each word
                   capitalized=$(echo "$prj_str" | awk '{for (i=1; i<=NF; i++) $i = toupper(substr($i,1,1)) substr($i,2); print}')
-                  export viewer_channel="Second Life Project $capitalized"
+                  export viewer_channel="VulkanLife Project $capitalized"
               elif  [[ "$prefix" == "release" || "$prefix" == "main" ]];
               then
-                  export viewer_channel="Second Life Release"
+                  export viewer_channel="VulkanLife Release"
               else
-                  export viewer_channel="Second Life Test"
+                  export viewer_channel="VulkanLife Test"
               fi
           fi
           echo "viewer_channel=$viewer_channel"
