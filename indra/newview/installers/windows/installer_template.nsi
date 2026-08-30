@@ -642,7 +642,7 @@ FunctionEnd
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 Function CloseSecondLife
   Push $0
-  FindWindow $0 "Second Life" ""
+  FindWindow $0 "VulkanLife" ""
   IntCmp $0 0 DONE
   
   StrCmp $SKIP_DIALOGS "true" CLOSE
@@ -656,7 +656,7 @@ Function CloseSecondLife
     SendMessage $0 16 0 0
 
   LOOP:
-	  FindWindow $0 "Second Life" ""
+	  FindWindow $0 "VulkanLife" ""
 	  IntCmp $0 0 SLEEP
 	  Sleep 500
 	  Goto LOOP
@@ -680,7 +680,7 @@ FunctionEnd
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 Function un.CloseSecondLife
   Push $0
-  FindWindow $0 "Second Life" ""
+  FindWindow $0 "VulkanLife" ""
   IntCmp $0 0 DONE
   MessageBox MB_OKCANCEL $(CloseSecondLifeUnInstMB) IDOK CLOSE IDCANCEL CANCEL_UNINSTALL
 
@@ -692,7 +692,7 @@ Function un.CloseSecondLife
     SendMessage $0 16 0 0
 
   LOOP:
-	  FindWindow $0 "Second Life" ""
+	  FindWindow $0 "VulkanLife" ""
 	  IntCmp $0 0 DONE
 	  Sleep 500
 	  Goto LOOP

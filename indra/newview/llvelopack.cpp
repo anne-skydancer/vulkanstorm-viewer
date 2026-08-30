@@ -694,7 +694,8 @@ void clear_nsis_links(const std::string& nsis_folder_path)
         update_taskbar_shortcut(nsis_folder_path, path, app_name, L"Second Life.lnk"); // Window class name
         update_taskbar_shortcut(nsis_folder_path, path, app_name, L"Second Life(1).lnk"); // Just in case user somehow did it twice and removed first
         update_taskbar_shortcut(nsis_folder_path, path, app_name, L"SecondLifeViewer.lnk"); // Executable name
-        update_taskbar_shortcut(nsis_folder_path, path, app_name, L"secondlife-bin.lnk"); // Debug builds
+        update_taskbar_shortcut(nsis_folder_path, path, app_name, L"VulkanLifeViewer.lnk"); // Executable name
+        update_taskbar_shortcut(nsis_folder_path, path, app_name, L"vulkanlife-bin.lnk"); // Debug builds
         update_taskbar_shortcut(nsis_folder_path, path, app_name, app_name + L".lnk"); // Default name
     }
 }

@@ -275,7 +275,7 @@ class ViewerManifest(LLManifest):
         return CHANNEL_VENDOR_BASE + ' ' + app_suffix
 
     def exec_name(self):
-        return "SecondLifeViewer"
+        return "VulkanLifeViewer"
 
     def app_name_oneword(self):
         return ''.join(self.app_name().split())
@@ -519,8 +519,8 @@ class Windows_x86_64_Manifest(ViewerManifest):
         debpkgdir = os.path.join(pkgdir, "lib", "debug")
 
         if self.is_packaging_viewer():
-            # Find secondlife-bin.exe in the 'configuration' dir, then rename it to the result of final_exe.
-            self.path(src='%s/secondlife-bin.exe' % self.args['configuration'], dst=self.final_exe())
+            # Find vulkanlife-bin.exe in the 'configuration' dir, then rename it to the result of final_exe.
+            self.path(src='%s/vulkanlife-bin.exe' % self.args['configuration'], dst=self.final_exe())
 
             GITHUB_OUTPUT = os.getenv('GITHUB_OUTPUT')
             if GITHUB_OUTPUT:
@@ -545,7 +545,7 @@ class Windows_x86_64_Manifest(ViewerManifest):
                                     # except for this stuff
                                     *(('!' + os.path.join(appbase, pattern))
                                         for pattern in (
-                                                'secondlife-bin.*',
+                                                'vulkanlife-bin.*',
                                                 '*_Setup.exe',
                                                 '*.bat',
                                                 '*.tar.xz')))
@@ -778,7 +778,7 @@ class Windows_x86_64_Manifest(ViewerManifest):
         pack_dir = self.get_dst_prefix()
         main_exe = self.final_exe()
         installer_base = self.installer_base_name()
-        exclude_pattern = r'.*\.pdb|.*\.map|.*\.bat|.*\.exp|.*\.lib|.*\.nsi|.*\.tar\.xz|secondlife-bin\..*|.*_Setup\.exe|.*-Setup\.exe'
+        exclude_pattern = r'.*\.pdb|.*\.map|.*\.bat|.*\.exp|.*\.lib|.*\.nsi|.*\.tar\.xz|vulkanlife-bin\..*|.*_Setup\.exe|.*-Setup\.exe'
 
         # Channel-specific icon for the Velopack installer.
         # CMake copies icons/{channel}/secondlife.ico to res/ll_icon.ico at configure time.
@@ -1242,7 +1242,7 @@ class Darwin_x86_64_Manifest(ViewerManifest):
         # The .app bundle path (e.g., "/path/to/Second Life Release.app")
         app_bundle = self.get_dst_prefix()
         # Bundle ID from args (e.g., "com.secondlife.viewer")
-        bundle_id = self.args.get('bundleid', 'com.secondlife.indra.viewer')
+        bundle_id = self.args.get('bundleid', 'org.vulkanlife.viewer')
 
         # Icon path for macOS
         icon_path = os.path.join(self.get_src_prefix(), self.icon_path(), 'secondlife.icns')
@@ -1351,7 +1351,7 @@ class LinuxManifest(ViewerManifest):
 
         self.path("licenses-linux.txt","licenses.txt")
         with self.prefix("linux_tools"):
-            self.path("wrapper.sh","secondlife")
+            self.path("wrapper.sh","vulkanlife")
             with self.prefix(dst="etc"):
                 self.path("handle_secondlifeprotocol.sh")
                 self.path("register_secondlifeprotocol.sh")
@@ -1359,7 +1359,7 @@ class LinuxManifest(ViewerManifest):
             self.path("install.sh")
 
         with self.prefix(dst="bin"):
-            self.path("secondlife-bin","do-not-directly-run-secondlife-bin")
+            self.path("vulkanlife-bin","do-not-directly-run-vulkanlife-bin")
             self.path2basename("../llplugin/slplugin", "SLPlugin")
             #this copies over the python wrapper script, associated utilities and required libraries, see SL-321, SL-322 and SL-323
             #with self.prefix(src="../viewer_components/manager", dst=""):

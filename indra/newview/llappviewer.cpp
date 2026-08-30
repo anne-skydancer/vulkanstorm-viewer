@@ -385,13 +385,13 @@ WorkQueue gMainloopWork("mainloop", 1024*1024);
 // Internal globals... that should be removed.
 static std::string gArgs;
 const int MAX_MARKER_LENGTH = 1024;
-const std::string MARKER_FILE_NAME("SecondLife.exec_marker");
-const std::string START_MARKER_FILE_NAME("SecondLife.start_marker");
-const std::string ERROR_MARKER_FILE_NAME("SecondLife.error_marker");
-const std::string LOGOUT_MARKER_FILE_NAME("SecondLife.logout_marker");
-const std::string WATCHDOG_MARKER_FILE_NAME("SecondLife.watchdog_marker");
-const std::string INITED_MARKER_FILE_NAME("SecondLife.inited_marker");
-const std::string CLOSE_EVENT_MARKER_FILE_NAME("SecondLife.close_marker");
+const std::string MARKER_FILE_NAME("VulkanLife.exec_marker");
+const std::string START_MARKER_FILE_NAME("VulkanLife.start_marker");
+const std::string ERROR_MARKER_FILE_NAME("VulkanLife.error_marker");
+const std::string LOGOUT_MARKER_FILE_NAME("VulkanLife.logout_marker");
+const std::string WATCHDOG_MARKER_FILE_NAME("VulkanLife.watchdog_marker");
+const std::string INITED_MARKER_FILE_NAME("VulkanLife.inited_marker");
+const std::string CLOSE_EVENT_MARKER_FILE_NAME("VulkanLife.close_marker");
 static std::string gLaunchFileOnQuit;
 
 //----------------------------------------------------------------------------
@@ -696,7 +696,7 @@ LLAppViewer::LLAppViewer()
 
     // Need to do this initialization before we do anything else, since anything
     // that touches files should really go through the lldir API
-    gDirUtilp->initAppDirs("SecondLife");
+    gDirUtilp->initAppDirs("VulkanLife");
     //
     // IMPORTANT! Do NOT put anything that will write
     // into the log files during normal startup until AFTER
@@ -2636,7 +2636,7 @@ namespace
         }
 #endif
 
-        return gDirUtilp->getExpandedFilename(LL_PATH_LOGS, "SecondLife.log");
+        return gDirUtilp->getExpandedFilename(LL_PATH_LOGS, "VulkanLife.log");
     }
 
     std::string getOldLogFileName(const std::string& log_file)
@@ -3887,14 +3887,14 @@ void LLAppViewer::writeSystemInfo()
 
 #if LL_DARWIN
     // crash processing in CrashMetadataSingleton reads SLLog
-    gDebugInfo["SLLog"] = gDirUtilp->getExpandedFilename(LL_PATH_LOGS,"SecondLife.crash");
+    gDebugInfo["SLLog"] = gDirUtilp->getExpandedFilename(LL_PATH_LOGS,"VulkanLife.crash");
 #elif LL_WINDOWS && !LL_BUGSPLAT
-    gDebugInfo["SLLog"] = gDirUtilp->getExpandedFilename(LL_PATH_DUMP,"SecondLife.log");
+    gDebugInfo["SLLog"] = gDirUtilp->getExpandedFilename(LL_PATH_DUMP,"VulkanLife.log");
 #else
     // Far from ideal, especially when multiple instances get involved.
     // Note that attachmentsForBugSplat expects .old extendion.
     // Todo: improve.
-    gDebugInfo["SLLog"] = gDirUtilp->getExpandedFilename(LL_PATH_LOGS,"SecondLife.old");  //LLError::logFileName();
+    gDebugInfo["SLLog"] = gDirUtilp->getExpandedFilename(LL_PATH_LOGS,"VulkanLife.old");  //LLError::logFileName();
 #endif
 
     gDebugInfo["ClientInfo"]["Name"] = LLVersionInfo::instance().getChannel();
@@ -4167,12 +4167,12 @@ void LLAppViewer::processMarkerFiles()
         return;
     }
     //We've got 4 things to test for here
-    // - Other Process Running (SecondLife.exec_marker present, locked)
-    // - Freeze (SecondLife.exec_marker present, not locked)
-    // - LLError Crash (SecondLife.llerror_marker present)
-    // - Other Crash (SecondLife.error_marker present)
-    // - Watchdog freeze (SecondLife.watchdog_marker present)
-    // - Failed to initialize (SecondLife.inited_marker not present)
+    // - Other Process Running (VulkanLife.exec_marker present, locked)
+    // - Freeze (VulkanLife.exec_marker present, not locked)
+    // - LLError Crash (VulkanLife.llerror_marker present)
+    // - Other Crash (VulkanLife.error_marker present)
+    // - Watchdog freeze (VulkanLife.watchdog_marker present)
+    // - Failed to initialize (VulkanLife.inited_marker not present)
     // - Potentially killed by task manager or computer
     // didn't recover from hibernation (SecondLife.close_marker present)
     // These checks should also remove these files for the last 2 cases
