@@ -1,0 +1,51 @@
+VulkanLife Viewer
+=================
+
+VulkanLife is based on the Second Life Viewer source code, licensed under the
+GNU Lesser General Public License, version 2.1 (see LICENSE and
+doc/LGPL-license.txt). All Linden Research, Inc. copyright headers are
+retained in the source files.
+
+This product includes source code developed by third-party viewer projects.
+The following notices apply to vendored portions of the code base:
+
+RLVa (Restrained Love API)
+--------------------------
+Portions imported from the Phoenix Firestorm viewer implementing the
+Restrained Love API (rlv*.h / rlv*.cpp in indra/newview) carry the copyright
+and license terms of their original author, Kitty Barnett. The original
+per-file license headers are preserved in each imported file.
+
+Area Search
+-----------
+indra/newview/fsareasearch.{h,cpp} and indra/newview/fsareasearchmenu.{h,cpp}:
+Copyright (c) 2012 Techwolf Lupindo, licensed under the GNU Lesser General
+Public License, version 2.1 (viewerlgpl), via the Phoenix Firestorm viewer.
+
+Pie Menu
+--------
+indra/newview/piemenu.{h,cpp}, pieslice.{h,cpp}, pieseparator.{h,cpp} and
+pieautohide.{h,cpp}:
+Copyright (C) 2010, Linden Research, Inc. and Copyright (C) 2011,
+Zi Ree @ Second Life, licensed under the GNU Lesser General Public License,
+version 2.1 (viewerlgpl), via the Phoenix Firestorm viewer.
+
+Procedural Starfield
+--------------------
+Star generation and shader changes in indra/newview/llvowlsky.{h,cpp},
+indra/newview/lldrawpoolwlsky.{h,cpp} and
+indra/newview/app_settings/shaders/class1/*/stars{F,V}.glsl:
+Copyright (C) 2025, William Weaver (paperwork) @ Second Life, licensed under
+the GNU Lesser General Public License, version 2.1 (viewerlgpl), via the
+Aperture Viewer project.
+
+Pinned donor revisions
+----------------------
+Imports are taken from the following donor revisions (see
+doc/vendor-sources.md for details):
+
+  Phoenix Firestorm (FirestormViewer/phoenix-firestorm, branch master):
+    89d84df58377c4622f367d3c419d5d67e4948153
+
+  Aperture Viewer (ApertureViewer/Aperture-Viewer, branch dev):
+    933ecb09cc09398ffe99151ede11043d1a75df76
