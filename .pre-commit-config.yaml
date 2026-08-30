@@ -1,3 +1,9 @@
+# Paths of files vendored from donor viewers (see doc/vendor-sources.md).
+# Vendored files keep their donor formatting, so the indent-with-spaces and
+# trailing-whitespace hooks exclude them via the regex below. The
+# opensource-license and copyright hooks are NEVER excluded: vendored headers
+# must remain intact and verifiable.
+
 repos:
   - repo: https://github.com/secondlife/git-hooks.git
     rev: v1.0.2
@@ -11,6 +17,7 @@ repos:
         exclude: language.txt
       - id: indent-with-spaces
         files: \.(cpp|c|m|mm|h|inl|py|glsl|cmake)$
+        exclude: ^indra/newview/(rlv[a-z_]*|fsareasearch|fsareasearchmenu|piemenu|pieslice|pieseparator|pieautohide)\.(h|cpp|hpp)$
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v6.0.0
     hooks:
@@ -18,3 +25,4 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
         files: \.(cpp|c|m|mm|h|inl|py|glsl|cmake|yaml|sh)$
+        exclude: ^indra/newview/(rlv[a-z_]*|fsareasearch|fsareasearchmenu|piemenu|pieslice|pieseparator|pieautohide)\.(h|cpp|hpp)$
