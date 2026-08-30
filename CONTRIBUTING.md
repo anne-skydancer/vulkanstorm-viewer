@@ -5,12 +5,19 @@ summarizes some of the most important points for people looking to contribute
 to the platform especially those looking to provide bug reports and code
 changes.
 
+> **VulkanLife note:** this repository is the VulkanLife fork. The sections
+> below up to [VulkanLife development workflow](#vulkanlife-development-workflow)
+> are retained from upstream Linden Lab. VulkanLife-specific workflow,
+> tooling, and branching rules are defined in that section and take
+> precedence for work landing in this fork.
+
 ## Table of contents
 
 - [Communication](#communication)
 - [What to work on](#what-to-work-on)
 - [Reporting bugs and requesting features](#reporting-bugs-and-requesting-features)
 - [Contributing pull requests](#contributing-pull-requests)
+- [VulkanLife development workflow](#vulkanlife-development-workflow)
 
 ## Communication
 
@@ -79,6 +86,67 @@ If you wish to contribute a new pull request, please ensure that:
 
 The [Git Style Guide](https://github.com/agis/git-style-guide) is also a good
 reference for best git practices.
+
+## VulkanLife development workflow
+
+The rules in this section apply to all work landing in the VulkanLife fork.
+
+### Branching
+
+- New features are **always** developed in feature branches off `develop`.
+  Never commit feature work directly to `develop`; it stays the verified
+  baseline.
+- Branch naming: `feature/<name>` for features, `chore/<name>` for
+  tooling/licensing/housekeeping, `fix/<name>` for bug fixes.
+- Every branch lands via a **pull request** against `develop`. No direct
+  merges. The PR description must map to the feature's plan checklist and
+  include verification evidence.
+
+### Toolchain (required)
+
+This repository enforces a consistent toolchain. Set it up once:
+
+```sh
+pip install pre-commit
+pre-commit install
+```
+
+- **pre-commit** hooks (`.pre-commit-config.yaml`): Linden's
+  `secondlife/git-hooks` (opensource-license, llsd, no-trigraphs, copyright,
+  end-of-file, indent-with-spaces) plus `check-xml`, `mixed-line-ending`, and
+  `trailing-whitespace`. Hooks run on every commit; to check the whole tree
+  run `pre-commit run --all-files`.
+- **clang-format** (`.clang-format`, requires clang-format 10 or newer;
+  Allman braces, 140-column limit): all newly written or modified C++ must
+  be formatted before merge. Format a change set with `git clang-format`
+  (from clang-tools) or your editor's format-on-save using the repo config.
+- **scripts/code_tools/** contains helper scripts (`fix_whitespace.py`,
+  `fix_xml_indentations.py`, `modified_strings.py`) for bulk cleanup and for
+  auditing localizable string changes.
+
+### Vendored donor code
+
+Files imported from donor viewers (see [doc/vendor-sources.md](doc/vendor-sources.md)
+for the pinned donor revisions) keep their original donor formatting. The
+`indent-with-spaces` and `trailing-whitespace` hooks are excluded for the
+vendored paths in `.pre-commit-config.yaml`.
+
+- The `opensource-license` and `copyright` hooks are **never** excluded —
+  donor copyright and license headers must remain intact.
+- Keep vendored files byte-close to the donor revision; put local changes at
+  call sites. Unavoidable local edits inside vendored files are wrapped in
+  `<VL:...>` / `</VL:...>` marker comments.
+- When refreshing a donor pin, update `NOTICE` and `doc/vendor-sources.md`
+  and re-audit the diff for new third-party copyrights.
+
+### Merge requirements
+
+A pull request may merge only when all of the following hold:
+
+1. The build is green on supported platforms.
+2. The feature's verification checklist from its plan is complete.
+3. `pre-commit run --all-files` is clean for the change set.
+4. The PR has been reviewed and approved by a maintainer.
 
 [feedback.secondlife.com]: https://feedback.secondlife.com
 [slug]: https://community.secondlife.com/blogs/entry/6509-introducing-the-second-life-public-calendar/
