@@ -1,10 +1,10 @@
 /**
- * @file llpaneldirpeople.h
- * @brief People panel in the legacy Search directory.
+ * @file llfloatermaturitydialog.h
+ * @brief LLFloaterMaturityDialog class definition
  *
- * $LicenseInfo:firstyear=2025&license=viewerlgpl$
+ * $LicenseInfo:firstyear=2026&license=viewerlgpl$
  * Second Life Viewer Source Code
- * Copyright (C) 2025, Linden Research, Inc.
+ * Copyright (C) 2026, Linden Research, Inc.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -24,32 +24,24 @@
  * $/LicenseInfo$
  */
 
-#ifndef LL_LLPANELDIRPEOPLE_H
-#define LL_LLPANELDIRPEOPLE_H
+#pragma once
 
-#include "llpaneldirbrowser.h"
-class LLLineEditor;
-class LLFloaterDirectory;
+#include "llmodaldialog.h"
 
-class LLPanelDirPeople : public LLPanelDirBrowser
+class LLFloaterMaturityDialog : public LLModalDialog
 {
+    friend class LLFloaterReg;
 public:
-    LLPanelDirPeople();
-    virtual ~LLPanelDirPeople();
-
-    /*virtual*/ bool postBuild();
-
-    /*virtual*/ void performQuery();
-
-    static void onClickSearch(void *userdata);
-    static void onKeystrokeName(LLLineEditor* line, void* data);
+    bool postBuild() override;
+    void onOpen(const LLSD& key) override;
+    void draw() override;
 
 private:
-    void onResultsRightClick(LLUICtrl* ctrl, S32 x, S32 y);
-    void onViewProfile();
+    LLFloaterMaturityDialog(const LLSD& key);
+    ~LLFloaterMaturityDialog() = default;
 
-    LLHandle<LLContextMenu> mPopupMenuHandle;
-    LLUUID mSelectedAvatarID;
+    void onContinue();
+    void onCancel();
+
+    U8 mRegionAccess = SIM_ACCESS_ADULT;
 };
-
-#endif
